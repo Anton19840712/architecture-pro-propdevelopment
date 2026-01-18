@@ -1,0 +1,11 @@
+# Constraint: требовать runAsNonRoot и readOnlyRootFilesystem
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPRunAsNonRoot
+metadata:
+  name: require-run-as-nonroot
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    namespaces: ["audit-zone"]

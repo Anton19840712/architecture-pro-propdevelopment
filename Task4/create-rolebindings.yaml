@@ -1,0 +1,76 @@
+# Связывание пользователей с ролями
+# Применение: kubectl apply -f create-rolebindings.yaml
+
+---
+# Менеджер -> viewer
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: viewer-binding
+  namespace: propdevelopment
+subjects:
+- kind: ServiceAccount
+  name: viewer-user
+  namespace: propdevelopment
+roleRef:
+  kind: Role
+  name: viewer
+  apiGroup: rbac.authorization.k8s.io
+---
+# Разработчик -> developer
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+  namespace: propdevelopment
+subjects:
+- kind: ServiceAccount
+  name: developer-user
+  namespace: propdevelopment
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+---
+# Инженер по эксплуатации -> operator
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: operator-binding
+  namespace: propdevelopment
+subjects:
+- kind: ServiceAccount
+  name: operator-user
+  namespace: propdevelopment
+roleRef:
+  kind: Role
+  name: operator
+  apiGroup: rbac.authorization.k8s.io
+---
+# DevOps -> cluster-admin (встроенная ClusterRole)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: devops-admin-binding
+subjects:
+- kind: ServiceAccount
+  name: devops-user
+  namespace: propdevelopment
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+# ИБ-специалист -> security-auditor (кластерный уровень)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: security-auditor-binding
+subjects:
+- kind: ServiceAccount
+  name: security-auditor-user
+  namespace: propdevelopment
+roleRef:
+  kind: ClusterRole
+  name: security-auditor
+  apiGroup: rbac.authorization.k8s.io

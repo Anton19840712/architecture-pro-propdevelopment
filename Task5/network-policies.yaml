@@ -1,0 +1,105 @@
+# Сетевые политики для разделения трафика между сервисами
+# Применение: kubectl apply -f network-policies.yaml
+
+# Сначала создаём поды (для справки):
+# kubectl run front-end-app --image=nginx --labels role=front-end --expose --port 80
+# kubectl run back-end-api-app --image=nginx --labels role=back-end-api --expose --port 80
+# kubectl run admin-front-end-app --image=nginx --labels role=admin-front-end --expose --port 80
+# kubectl run admin-back-end-api-app --image=nginx --labels role=admin-back-end-api --expose --port 80
+
+---
+# Политика для front-end: разрешить трафик только от/к back-end-api
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: front-end-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: front-end
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: back-end-api
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: back-end-api
+---
+# Политика для back-end-api: разрешить трафик только от/к front-end
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: back-end-api-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: back-end-api
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: front-end
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: front-end
+---
+# Политика для admin-front-end: разрешить трафик только от/к admin-back-end-api
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-front-end-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: admin-front-end
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: admin-back-end-api
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: admin-back-end-api
+---
+# Политика для admin-back-end-api: разрешить трафик только от/к admin-front-end
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-back-end-api-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: admin-back-end-api
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: admin-front-end
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: admin-front-end

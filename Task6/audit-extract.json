@@ -1,0 +1,130 @@
+[
+  {
+    "kind": "Event",
+    "apiVersion": "audit.k8s.io/v1",
+    "level": "RequestResponse",
+    "stage": "ResponseComplete",
+    "requestURI": "/api/v1/namespaces/kube-system/secrets",
+    "verb": "get",
+    "user": {
+      "username": "system:serviceaccount:secure-ops:monitoring",
+      "groups": ["system:serviceaccounts", "system:serviceaccounts:secure-ops"]
+    },
+    "objectRef": {
+      "resource": "secrets",
+      "namespace": "kube-system",
+      "apiVersion": "v1"
+    },
+    "responseStatus": {
+      "code": 403
+    },
+    "comment": "SUSPICIOUS: Monitoring SA accessing secrets in kube-system"
+  },
+  {
+    "kind": "Event",
+    "apiVersion": "audit.k8s.io/v1",
+    "level": "RequestResponse",
+    "stage": "ResponseComplete",
+    "requestURI": "/api/v1/namespaces/secure-ops/pods",
+    "verb": "create",
+    "user": {
+      "username": "kubernetes-admin"
+    },
+    "objectRef": {
+      "resource": "pods",
+      "namespace": "secure-ops",
+      "name": "privileged-pod",
+      "apiVersion": "v1"
+    },
+    "requestObject": {
+      "spec": {
+        "containers": [{
+          "name": "pwn",
+          "image": "alpine",
+          "securityContext": {
+            "privileged": true
+          }
+        }]
+      }
+    },
+    "responseStatus": {
+      "code": 201
+    },
+    "comment": "CRITICAL: Privileged pod created"
+  },
+  {
+    "kind": "Event",
+    "apiVersion": "audit.k8s.io/v1",
+    "level": "RequestResponse",
+    "stage": "ResponseComplete",
+    "requestURI": "/api/v1/namespaces/kube-system/pods/coredns-xxx/exec",
+    "verb": "create",
+    "user": {
+      "username": "kubernetes-admin"
+    },
+    "objectRef": {
+      "resource": "pods",
+      "subresource": "exec",
+      "namespace": "kube-system",
+      "name": "coredns-xxx",
+      "apiVersion": "v1"
+    },
+    "responseStatus": {
+      "code": 101
+    },
+    "comment": "SUSPICIOUS: Exec into system pod coredns"
+  },
+  {
+    "kind": "Event",
+    "apiVersion": "audit.k8s.io/v1",
+    "level": "RequestResponse",
+    "stage": "ResponseComplete",
+    "requestURI": "/apis/rbac.authorization.k8s.io/v1/namespaces/secure-ops/rolebindings",
+    "verb": "create",
+    "user": {
+      "username": "kubernetes-admin"
+    },
+    "objectRef": {
+      "resource": "rolebindings",
+      "namespace": "secure-ops",
+      "name": "escalate-binding",
+      "apiGroup": "rbac.authorization.k8s.io"
+    },
+    "requestObject": {
+      "subjects": [{
+        "kind": "ServiceAccount",
+        "name": "monitoring",
+        "namespace": "secure-ops"
+      }],
+      "roleRef": {
+        "kind": "ClusterRole",
+        "name": "cluster-admin",
+        "apiGroup": "rbac.authorization.k8s.io"
+      }
+    },
+    "responseStatus": {
+      "code": 201
+    },
+    "comment": "CRITICAL: Privilege escalation - cluster-admin granted to monitoring SA"
+  },
+  {
+    "kind": "Event",
+    "apiVersion": "audit.k8s.io/v1",
+    "level": "Metadata",
+    "stage": "ResponseComplete",
+    "requestURI": "/api/v1/namespaces/kube-system/configmaps/audit-policy",
+    "verb": "delete",
+    "user": {
+      "username": "admin"
+    },
+    "objectRef": {
+      "resource": "configmaps",
+      "namespace": "kube-system",
+      "name": "audit-policy"
+    },
+    "responseStatus": {
+      "code": 403
+    },
+    "comment": "CRITICAL: Attempt to delete audit policy - anti-forensics"
+  }
+]

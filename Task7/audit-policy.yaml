@@ -1,0 +1,25 @@
+# Политика аудита для Kubernetes
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+# Логировать все операции с pods, secrets, configmaps, serviceaccounts, roles, rolebindings
+- level: RequestResponse
+  verbs: ["create", "delete", "update", "patch", "get", "list"]
+  resources:
+  - group: ""
+    resources: ["pods", "secrets", "configmaps", "serviceaccounts"]
+  - group: "rbac.authorization.k8s.io"
+    resources: ["roles", "rolebindings", "clusterroles", "clusterrolebindings"]
+
+# Логировать exec в поды
+- level: RequestResponse
+  verbs: ["create"]
+  resources:
+  - group: ""
+    resources: ["pods/exec", "pods/attach"]
+
+# Метаданные для всех остальных ресурсов
+- level: Metadata
+  resources:
+  - group: "*"
+    resources: ["*"]
