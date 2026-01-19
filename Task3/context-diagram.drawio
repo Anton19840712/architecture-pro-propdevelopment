@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="22.1.0">
+  <diagram id="context" name="C4 Context - Smart Home">
+    <mxGraphModel dx="900" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="C4 Context: Интеграция Умный дом" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="owner" value="Собственник&#xa;[Person]" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=none;strokeColor=#333333;fontColor=#333333;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="100" y="280" width="40" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="prop" value="PropDevelopment&#xa;[Software System]&#xa;&#xa;Мобильное приложение&#xa;для собственников" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;fontSize=10;fontColor=#333333;align=center;" vertex="1" parent="1">
+          <mxGeometry x="380" y="260" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="partner" value="Платформа Умный дом&#xa;[External System]&#xa;&#xa;Партнёр: домофон,&#xa;шлагбаум" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="260" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="intercom" value="Домофон&#xa;[Device]&#xa;Биометрия" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="barrier" value="Шлагбаум&#xa;[Device]&#xa;Номера авто" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="Управление" style="endArrow=classic;html=1;strokeColor=#333333;fontSize=9;fontColor=#666666;" edge="1" parent="1" source="owner" target="prop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="API (OAuth 2.0 + mTLS)" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#333333;fontSize=9;fontColor=#666666;" edge="1" parent="1" source="prop" target="partner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#999999;dashed=1;fontSize=9;" edge="1" parent="1" source="partner" target="intercom">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#999999;dashed=1;fontSize=9;" edge="1" parent="1" source="partner" target="barrier">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
