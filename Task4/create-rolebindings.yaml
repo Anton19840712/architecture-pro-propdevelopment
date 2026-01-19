@@ -1,75 +1,66 @@
-# Связывание пользователей с ролями
-# Применение: kubectl apply -f create-rolebindings.yaml
-
----
-# Менеджер -> viewer
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: viewer-binding
-  namespace: propdevelopment
+  namespace: app-prod
 subjects:
 - kind: ServiceAccount
-  name: viewer-user
-  namespace: propdevelopment
+  name: viewer
+  namespace: app-prod
 roleRef:
   kind: Role
   name: viewer
   apiGroup: rbac.authorization.k8s.io
 ---
-# Разработчик -> developer
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: developer-binding
-  namespace: propdevelopment
+  namespace: app-dev
 subjects:
 - kind: ServiceAccount
-  name: developer-user
-  namespace: propdevelopment
+  name: developer
+  namespace: app-dev
 roleRef:
   kind: Role
   name: developer
   apiGroup: rbac.authorization.k8s.io
 ---
-# Инженер по эксплуатации -> operator
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: operator-binding
-  namespace: propdevelopment
+  namespace: app-prod
 subjects:
 - kind: ServiceAccount
-  name: operator-user
-  namespace: propdevelopment
+  name: operator
+  namespace: app-prod
 roleRef:
   kind: Role
   name: operator
   apiGroup: rbac.authorization.k8s.io
 ---
-# DevOps -> cluster-admin (встроенная ClusterRole)
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: devops-admin-binding
+  name: cluster-admin-binding
 subjects:
 - kind: ServiceAccount
-  name: devops-user
-  namespace: propdevelopment
+  name: cluster-admin-sa
+  namespace: kube-system
 roleRef:
   kind: ClusterRole
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 ---
-# ИБ-специалист -> security-auditor (кластерный уровень)
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: security-auditor-binding
 subjects:
 - kind: ServiceAccount
-  name: security-auditor-user
-  namespace: propdevelopment
+  name: security-auditor
+  namespace: security
 roleRef:
   kind: ClusterRole
   name: security-auditor

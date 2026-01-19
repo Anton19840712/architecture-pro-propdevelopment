@@ -1,29 +1,27 @@
-# Роли и полномочия при работе с Kubernetes
+# Матрица ролей Kubernetes для PropDevelopment
 
-## Таблица ролей
+## Роли и права доступа
 
-| Роль | Права роли | Группы пользователей |
-|------|------------|----------------------|
-| `viewer` | get, list, watch на pods, services, deployments, configmaps | Менеджеры, Бизнес-аналитики |
-| `developer` | get, list, watch, create, update, patch, delete на pods, services, deployments, configmaps, ingress | Разработчики |
-| `operator` | Все права developer + get, list на secrets, + exec в pods | Инженеры по эксплуатации |
-| `cluster-admin` | Полный доступ ко всем ресурсам кластера | DevOps-инженеры |
-| `security-auditor` | get, list, watch на все ресурсы + просмотр audit logs | Специалист по ИБ |
-
-## Обоснование
-
-1. **viewer** — минимальные права для просмотра состояния. Менеджеры и аналитики могут мониторить без риска изменений.
-
-2. **developer** — права на управление приложениями в рамках namespace. Без доступа к secrets для защиты конфиденциальных данных.
-
-3. **operator** — расширенные права для эксплуатации: доступ к secrets для диагностики, exec для отладки.
-
-4. **cluster-admin** — полный доступ для DevOps. Используется для настройки кластера, управления RBAC.
-
-5. **security-auditor** — read-only доступ ко всему для проведения аудита. Решает проблему изоляции ИБ-специалиста.
+| Роль | Namespace | Ресурсы | Права | Назначение |
+|------|-----------|---------|-------|------------|
+| viewer | app-* | pods, services, configmaps | get, list, watch | Просмотр для разработчиков |
+| developer | app-dev | pods, deployments, services, configmaps, secrets | get, list, watch, create, update, delete | Разработка в dev-окружении |
+| operator | app-* | pods, deployments, services, configmaps | get, list, watch, update, patch | Управление в prod |
+| cluster-admin | * | * | * | Администрирование кластера |
+| security-auditor | * | pods, secrets, networkpolicies, events | get, list, watch | Аудит безопасности |
 
 ## Принцип минимальных привилегий
 
-- Роли применяются на уровне namespace (кроме cluster-admin и security-auditor)
-- Каждый домен (продажи, ЖКУ, финансы, дата) имеет свой namespace
-- Пользователь получает роль только в namespace своего домена
+- **viewer**: только чтение, без доступа к secrets
+- **developer**: полный доступ только в dev namespace
+- **operator**: update/patch без delete в prod
+- **cluster-admin**: ограничен до 2 человек
+- **security-auditor**: read-only для аудита
+
+## Соответствие требованиям
+
+| Требование | Реализация |
+|------------|------------|
+| Разделение dev/prod | Namespace-based RBAC |
+| Минимальные привилегии | Роли ограничены по ресурсам |
+| Аудит доступа | security-auditor role |

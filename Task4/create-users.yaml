@@ -1,43 +1,29 @@
-# Создание пользователей (ServiceAccounts) для PropDevelopment
-# Применение: kubectl apply -f create-users.yaml
-
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: propdevelopment
----
-# Разработчик
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: developer-user
-  namespace: propdevelopment
+  name: viewer
+  namespace: app-prod
 ---
-# Инженер по эксплуатации
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: operator-user
-  namespace: propdevelopment
+  name: developer
+  namespace: app-dev
 ---
-# DevOps-инженер
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: devops-user
-  namespace: propdevelopment
+  name: operator
+  namespace: app-prod
 ---
-# Менеджер (только просмотр)
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: viewer-user
-  namespace: propdevelopment
+  name: cluster-admin-sa
+  namespace: kube-system
 ---
-# ИБ-специалист (аудит)
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: security-auditor-user
-  namespace: propdevelopment
+  name: security-auditor
+  namespace: security

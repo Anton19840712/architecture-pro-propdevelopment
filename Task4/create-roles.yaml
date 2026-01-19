@@ -1,64 +1,47 @@
-# Создание ролей для PropDevelopment
-# Применение: kubectl apply -f create-roles.yaml
-
----
-# Роль: viewer (только чтение)
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: viewer
-  namespace: propdevelopment
+  namespace: app-prod
 rules:
 - apiGroups: [""]
   resources: ["pods", "services", "configmaps"]
   verbs: ["get", "list", "watch"]
-- apiGroups: ["apps"]
-  resources: ["deployments", "replicasets"]
-  verbs: ["get", "list", "watch"]
 ---
-# Роль: developer (управление приложениями, без secrets)
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: developer
-  namespace: propdevelopment
+  namespace: app-dev
 rules:
 - apiGroups: [""]
-  resources: ["pods", "services", "configmaps"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  resources: ["pods", "services", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
 - apiGroups: ["apps"]
-  resources: ["deployments", "replicasets"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-- apiGroups: ["networking.k8s.io"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
 ---
-# Роль: operator (расширенные права + secrets + exec)
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: operator
-  namespace: propdevelopment
+  namespace: app-prod
 rules:
 - apiGroups: [""]
-  resources: ["pods", "services", "configmaps", "secrets"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-- apiGroups: [""]
-  resources: ["pods/exec", "pods/log"]
-  verbs: ["get", "create"]
+  resources: ["pods", "services", "configmaps"]
+  verbs: ["get", "list", "watch", "update", "patch"]
 - apiGroups: ["apps"]
-  resources: ["deployments", "replicasets", "statefulsets"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-- apiGroups: ["networking.k8s.io"]
-  resources: ["ingresses", "networkpolicies"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "update", "patch"]
 ---
-# ClusterRole: security-auditor (аудит всего кластера, read-only)
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: security-auditor
 rules:
-- apiGroups: ["*"]
-  resources: ["*"]
+- apiGroups: [""]
+  resources: ["pods", "secrets", "events"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["networkpolicies"]
   verbs: ["get", "list", "watch"]
