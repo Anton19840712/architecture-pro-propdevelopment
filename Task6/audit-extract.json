@@ -1,0 +1,55 @@
+{
+  "events": [
+    {
+      "timestamp": "2024-01-15T03:15:42Z",
+      "level": "RequestResponse",
+      "user": {
+        "username": "system:serviceaccount:default:unknown-sa"
+      },
+      "verb": "get",
+      "objectRef": {
+        "resource": "secrets",
+        "name": "db-credentials",
+        "namespace": "app-prod"
+      },
+      "responseStatus": {
+        "code": 200
+      },
+      "annotations": {
+        "authorization.k8s.io/decision": "allow"
+      }
+    },
+    {
+      "timestamp": "2024-01-15T14:22:10Z",
+      "level": "Request",
+      "user": {
+        "username": "dev-user",
+        "groups": ["developers"]
+      },
+      "verb": "create",
+      "objectRef": {
+        "resource": "clusterrolebindings",
+        "name": "dev-admin-binding"
+      },
+      "responseStatus": {
+        "code": 403,
+        "reason": "Forbidden"
+      }
+    },
+    {
+      "timestamp": "2024-01-15T22:45:00Z",
+      "level": "Metadata",
+      "user": {
+        "username": "operator"
+      },
+      "verb": "delete",
+      "objectRef": {
+        "resource": "deployments",
+        "namespace": "app-prod"
+      },
+      "responseStatus": {
+        "code": 200
+      }
+    }
+  ]
+}
