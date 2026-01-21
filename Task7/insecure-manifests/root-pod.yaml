@@ -1,0 +1,12 @@
+# INSECURE: Pod запущен от root
+apiVersion: v1
+kind: Pod
+metadata:
+  name: insecure-root
+  namespace: app-prod
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+    securityContext:
+      runAsUser: 0  # VIOLATION: running as root

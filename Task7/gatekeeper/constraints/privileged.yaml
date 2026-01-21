@@ -1,0 +1,11 @@
+# Constraint: применить запрет privileged к namespace audit-zone
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPPrivileged
+metadata:
+  name: deny-privileged-containers
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    namespaces: ["audit-zone"]

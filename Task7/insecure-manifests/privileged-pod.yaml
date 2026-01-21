@@ -1,0 +1,12 @@
+# INSECURE: Pod с privileged контейнером
+apiVersion: v1
+kind: Pod
+metadata:
+  name: insecure-privileged
+  namespace: app-prod
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+    securityContext:
+      privileged: true  # VIOLATION: privileged container

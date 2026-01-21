@@ -1,0 +1,39 @@
+# БЕЗОПАСНЫЙ: без hostPath, использует emptyDir
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secure-2
+  namespace: audit-zone
+spec:
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: nginx
+    image: nginx
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsUser: 1000
+      capabilities:
+        drop:
+        - ALL
+    volumeMounts:
+    - name: data
+      mountPath: /data
+    - name: tmp
+      mountPath: /tmp
+    - name: cache
+      mountPath: /var/cache/nginx
+    - name: run
+      mountPath: /var/run
+  volumes:
+  - name: data
+    emptyDir: {}
+  - name: tmp
+    emptyDir: {}
+  - name: cache
+    emptyDir: {}
+  - name: run
+    emptyDir: {}
