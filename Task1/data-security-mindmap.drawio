@@ -31,18 +31,26 @@
         </mxCell>
         <mxCell id="e2" style="endArrow=classic;html=1;strokeColor=#333333;exitX=1;exitY=0;" edge="1" parent="1" source="center" target="internal"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="int-d1" value="Данные о&#xa;недвижимости" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="940" y="120" width="80" height="40" as="geometry" />
+          <mxGeometry x="900" y="120" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="int-d2" value="Статистика" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="1030" y="120" width="70" height="30" as="geometry" />
+          <mxGeometry x="990" y="120" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="int-d3" value="Документация" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="1110" y="120" width="90" height="30" as="geometry" />
+          <mxGeometry x="1070" y="120" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="int-d4" value="Логи системы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="120" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="int-d5" value="Конфигурации" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="120" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ei1" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="internal" target="int-d1"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="ei2" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="internal" target="int-d2"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="ei3" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="internal" target="int-d3"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="int-risk" value="Риски: утечка, искажение&#xa;Оценка: ЗНАЧИТЕЛЬНЫЙ&#xa;Причина: конкурентное преимущество, ошибки в решениях" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+        <mxCell id="ei4" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="internal" target="int-d4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ei5" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="internal" target="int-d5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="int-risk" value="Риски: утечка, искажение&#xa;Оценка: ЗНАЧИТЕЛЬНЫЙ&#xa;Причина: конкурентное преимущество, поиск уязвимостей" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
           <mxGeometry x="940" y="260" width="280" height="50" as="geometry" />
         </mxCell>
         <mxCell id="conf" value="КОНФИДЕНЦИАЛЬНЫЕ" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
@@ -55,8 +63,8 @@
         <mxCell id="conf-d2" value="Данные&#xa;собственников" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="150" y="580" width="90" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="conf-d3" value="Данные сделок" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="250" y="580" width="90" height="30" as="geometry" />
+        <mxCell id="conf-d3" value="Данные&#xa;Умного дома" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="250" y="580" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="conf-d4" value="Платежи (маск.)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="350" y="580" width="90" height="30" as="geometry" />
@@ -65,7 +73,7 @@
         <mxCell id="ec2" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="conf" target="conf-d2"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="ec3" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="conf" target="conf-d3"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="ec4" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="conf" target="conf-d4"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="conf-risk" value="Риски: утечка, искажение - КРИТИЧЕСКИЙ&#xa;         потеря, некачество - ЗНАЧИТЕЛЬНЫЙ&#xa;Причина: ФЗ-152, штрафы, репутация, отображение чужих данных" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+        <mxCell id="conf-risk" value="Риски: утечка, искажение - КРИТИЧЕСКИЙ&#xa;         потеря, некачество - ЗНАЧИТЕЛЬНЫЙ&#xa;Причина: ФЗ-152, угроза физического насилия (адрес)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
           <mxGeometry x="40" y="740" width="350" height="60" as="geometry" />
         </mxCell>
         <mxCell id="secret" value="СЕКРЕТНЫЕ" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
@@ -73,23 +81,27 @@
         </mxCell>
         <mxCell id="e4" style="endArrow=classic;html=1;strokeColor=#333333;exitX=1;exitY=1;" edge="1" parent="1" source="center" target="secret"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="sec-d1" value="Биометрия" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="920" y="580" width="70" height="30" as="geometry" />
+          <mxGeometry x="900" y="580" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="sec-d2" value="Платёжные&#xa;данные (полн.)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="1000" y="580" width="90" height="40" as="geometry" />
+          <mxGeometry x="980" y="580" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="sec-d3" value="Ключи,&#xa;сертификаты" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="580" width="80" height="40" as="geometry" />
+          <mxGeometry x="1080" y="580" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="sec-d4" value="Учётные данные" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="1190" y="580" width="90" height="30" as="geometry" />
+          <mxGeometry x="1170" y="580" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sec-d5" value="Данные сделок" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="580" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="es1" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="secret" target="sec-d1"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="es2" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="secret" target="sec-d2"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="es3" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="secret" target="sec-d3"><mxGeometry relative="1" as="geometry" /></mxCell>
         <mxCell id="es4" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="secret" target="sec-d4"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="sec-risk" value="Риски: утечка, потеря, искажение - КРИТИЧЕСКИЙ&#xa;Причина: биометрия невосполнима, уголовная ответственность,&#xa;потеря ключей = остановка систем" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="920" y="740" width="320" height="60" as="geometry" />
+        <mxCell id="es5" style="endArrow=none;html=1;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="secret" target="sec-d5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="sec-risk" value="Риски: утечка, потеря, искажение - КРИТИЧЕСКИЙ&#xa;Причина: биометрия невосполнима, уголовная ответственность,&#xa;юридические/финансовые аспекты сделок" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="900" y="740" width="320" height="60" as="geometry" />
         </mxCell>
         <mxCell id="title" value="Классификация данных PropDevelopment (ISO/IEC 27001/27002)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="400" y="30" width="500" height="30" as="geometry" />
